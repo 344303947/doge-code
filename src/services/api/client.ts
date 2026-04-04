@@ -301,8 +301,9 @@ export async function getAnthropicClient({
   }
 
   // Determine authentication method based on available tokens
+  const effectiveApiKey = apiKey || getAnthropicApiKey()
   const clientConfig: ConstructorParameters<typeof Anthropic>[0] = {
-    apiKey: isClaudeAISubscriber() ? null : apiKey || getAnthropicApiKey(),
+    apiKey: isClaudeAISubscriber() ? null : effectiveApiKey,
     authToken: isClaudeAISubscriber()
       ? getClaudeAIOAuthTokens()?.accessToken
       : undefined,
