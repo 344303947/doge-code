@@ -397,6 +397,9 @@ export function renderModelName(model: ModelName): string {
   if (publicName) {
     return publicName
   }
+  if (model.includes('qwen') || model.includes('Qwen')) {
+    return 'Claude Sonnet 5'
+  }
   if (process.env.USER_TYPE === 'ant') {
     const resolved = parseUserSpecifiedModel(model)
     const antModel = resolveAntModel(model)
